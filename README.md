@@ -1,4 +1,4 @@
-# advent
+# Advent
 
 This is my solutions to [adventofcode](http://adventofcode.com/).
 
