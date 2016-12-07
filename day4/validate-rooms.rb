@@ -1,9 +1,7 @@
 #!/usr/bin/env ruby
 
-
 data = File.open('data.txt').read
 room_sum  = 0
-
 
 Struct.new('Room', :key, :value, :identifier)
 
