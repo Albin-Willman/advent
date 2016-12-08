@@ -87,7 +87,6 @@ s = Screen.new(50, 6)
 
 File.open('data.txt').read.each_line do |line|
   s.execute(interpret_line(line))
-  s.print_screen
 end
-
+s.print_screen
 puts s.count_leds
