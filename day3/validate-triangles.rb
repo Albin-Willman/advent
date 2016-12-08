@@ -11,8 +11,6 @@ def valid_triangle?(trio)
   trio[2] < (trio[1] + trio[0])
 end
 
-
-
 File.open('data.txt').read.each_line.with_index do |line, i|
   line_data = line.split(' ')
   line_data.each_with_index { |p, i| triangles[i] << p }
