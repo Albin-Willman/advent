@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+TARGET_PAIR = [61, 17]
+
 class Robot
   attr_accessor :chips, :coordinator, :target_high, :target_low, :id
   def initialize(coordinator, id)
@@ -13,7 +15,7 @@ class Robot
 
   def make_comparisson
     return unless chips.length == 2 && target_high && target_low
-    puts "#{id} Comparing the chips" if chips.max == 61 && chips.min == 17
+    puts "#{id} Comparing the chips" if chips.max == TARGET_PAIR[0] && chips.min == TARGET_PAIR[1]
     coordinator.distribute(target_high, chips.max)
     coordinator.distribute(target_low, chips.min)
     chips = []
@@ -57,8 +59,8 @@ class Coordinator
 
   def parse_robot_setting(instruction)
     values = instruction.scan(/\d+/).map(&:to_i)
-    low_target = instruction.include?('w to b') ? :robot : :output
-    high_target = instruction.include?('h to b') ? :robot : :output
+    low_target = instruction.include?('low to bot') ? :robot : :output
+    high_target = instruction.include?('high to bot') ? :robot : :output
     {
       action: :set,
       robot_id: values[0],
