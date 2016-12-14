@@ -19,5 +19,4 @@ File.open('data.txt').read.each_line do |line|
       break
     end
   end
-
 end
