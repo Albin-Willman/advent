@@ -2,16 +2,11 @@
 
 test_data = { disc_space: 20, input: '10000', expected_string: '10000011110010000111', expected_sum: '01100' }
 
+def expand(disc_space, a)
+  return a[0..disc_space-1] if a.length >= disc_space
+  puts a.length
 
-def expand(disc_space, input)
-  return input[0..disc_space-1] if input.length >= disc_space
-  a = input
-  b = a.reverse
-  b.gsub!('1', '2')
-  b.gsub!('0', '1')
-  b.gsub!('2', '0')
-
-  expand(disc_space, "#{a}0#{b}")
+  expand(disc_space, "#{a}0#{a.reverse.gsub('1', '2').gsub('0', '1').gsub('2', '0')}")
 end
 
 def check_sum(string)
