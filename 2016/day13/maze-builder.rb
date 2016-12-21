@@ -142,6 +142,3 @@ m = Maze.new(input)
 d = Dijkstras.new(m, 50, 50)
 d.run
 puts d.only_nodes.select { |n| n.distance <= 50 }.length
-
-
-
