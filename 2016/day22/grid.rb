@@ -71,7 +71,6 @@ class Grid
 
   def node_char(node)
     return '#' if node.used > limit
-    return '_' if node.used == 0
     return 'D' if node.x == start[0] && node.y == start[1]
     "#{node.used}/#{node.size}"
   end
