@@ -2,17 +2,17 @@
 
 class Computer
   attr_accessor :registers, :pointer, :cmds
-  def initialize
+  def initialize()
     @pointer = 0
-    @registers = { a: 0, b: 0, c: 1, d: 0 }
+    @registers = { a: 0, b: 0, c: 0, d: 0 }
   end
 
-  def execute(cmds)
-    @cmds = cmds
+  def execute(input)
+    @cmds ||= input
     cmd = cmds[pointer]
     while cmd
-      @pointer += 1
       run(cmd)
+      @pointer += 1
       cmd = cmds[pointer]
     end
   end
@@ -47,6 +47,12 @@ end
 class Parser
   REGISTERS = 'a'..'d'
   def parse(line)
+    res = do_parse(line)
+    res[:cmd] = line
+    res
+  end
+
+  def do_parse(line)
     return copy_cmd(line) if line.start_with?('cpy')
     return inc_cmd(line) if line.start_with?('inc')
     return dec_cmd(line) if line.start_with?('dec')
@@ -116,25 +122,3 @@ class Parser
   end
 
 end
-
-lines = [
-  'cpy 41 a',
-  'inc a',
-  'inc a',
-  'dec a',
-  'jnz a 2',
-  'dec a'
-]
-
-parser = Parser.new
-# cmds = lines.map { |line| parser.parse(line) }
-cmds = []
-File.open('data.txt').read.each_line do |line|
-  cmds << parser.parse(line.gsub(/\n/, ""))
-end
-puts cmds
-
-c = Computer.new
-c.execute(cmds)
-
-puts c.registers[:a]
