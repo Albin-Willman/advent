@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
 
 class Computer
-  attr_accessor :registers, :pointer, :cmds
+  attr_accessor :registers, :pointer, :cmds, :output
   def initialize()
     @pointer = 0
+    @output = []
     @registers = { a: 0, b: 0, c: 0, d: 0 }
   end
 
@@ -31,6 +32,12 @@ class Computer
     end
   end
 
+  def out(payload)
+    value = registers[payload[:source]]
+    output << value
+    puts value
+  end
+
   def change(payload)
     registers[payload[:target]] += payload[:value]
   end
@@ -56,6 +63,7 @@ class Parser
     return copy_cmd(line) if line.start_with?('cpy')
     return inc_cmd(line) if line.start_with?('inc')
     return dec_cmd(line) if line.start_with?('dec')
+    return out_cmd(line) if line.start_with?('out')
     jump_cmd(line)
   end
 
@@ -73,6 +81,15 @@ class Parser
     {
       type: :copy,
       payload: payload
+    }
+  end
+
+  def out_cmd(line)
+    {
+      type: :out,
+      payload: {
+        source: line[-1].to_sym
+      }
     }
   end
 
@@ -120,5 +137,4 @@ class Parser
   def is_register?(val)
     REGISTERS.cover?(val)
   end
-
 end
