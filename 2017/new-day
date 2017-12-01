@@ -1,0 +1,18 @@
+#!/bin/bash
+
+read -p "Enter your date: " day
+
+mkdir $day
+cd $day
+
+touch script.rb
+chmod +x script.rb
+echo "#!/usr/bin/env ruby" >> script.rb
+echo "File.open('data.txt').read.each_line do |line|
+end" >> script.rb
+touch task.rb
+touch data.txt
+touch test.rb
+chmod +x test.rb
+echo "#!/usr/bin/env ruby" >> test.rb
+echo 'require "task.rb"' >> test.rb
