@@ -11,4 +11,4 @@ puts "Task 1 solution is: #{ip.run(input)}"
 
 ip = InstructionParser.new(AdvancedManipulationComputer.new)
 
-puts "Task 1 solution is: #{ip.run(input)}"
+puts "Task 2 solution is: #{ip.run(input)}"
