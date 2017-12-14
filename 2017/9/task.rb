@@ -32,11 +32,11 @@ class Group
     end
 
     def clean(string)
-        string = clear_bangs(string.dup)
+        string = clear_bangs_in(string.dup)
         string.gsub(/<[^>]+>/, '').gsub(/[^{^}]/, '').split('')
     end
 
-    def clear_bangs(string)
+    def clear_bangs_in(string)
         inside_garbage = false
         chars = string.split('')
         chars.each_with_index do |c, i|

@@ -7,11 +7,15 @@ class HexGrid
     end
 
     def effective_distance
+        map_path
+        remove_loops
+        sum_steps
+    end
+
+    def map_path
         path.each do |step|
           steps[step] += 1
         end
-        remove_loops
-        sum_steps
     end
 
     def remove_loops
