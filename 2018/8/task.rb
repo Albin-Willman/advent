@@ -34,7 +34,6 @@ class Node
 
   def value1
     @value1 ||= @meta.sum + @children.inject(0) { |s, n| s + n.value1 }
-
   end
 
   def value2
