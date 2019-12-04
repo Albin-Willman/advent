@@ -19,7 +19,6 @@ class Wires
 
 	def distance_to_closest_intersction_by_wire
 		@intersections.map { |int| @wire_1["#{int[0]}-#{int[1]}"] + @wire_2["#{int[0]}-#{int[1]}"] }.min
-
 	end
 
 	def add_wire(input, check_for_intersection)
