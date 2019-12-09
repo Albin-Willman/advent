@@ -1,16 +1,22 @@
 class Computer
-	attr_accessor :ip, :memory, :system_id
+	attr_accessor :ip, :memory, :input_system, :output
 
-	def initialize(memory, system_id)
+	def initialize(memory, input_system = 0)
 		@memory = memory.clone
 		@ip = 0
-		@system_id = system_id
+		@input_system = input_system
 	end
 
 	def run
 		steps = perform_operand(@memory[ip])
-		return memory.first if steps == 99
+		return false if steps == 99
+		return @output if steps == 98
 		@ip += steps
+		run
+	end
+
+	def rerun(input_system)
+		@input_system = input_system
 		run
 	end
 
@@ -76,15 +82,17 @@ class Computer
 
 	def send_output(mode)
 		value1 = mode == "0" ? memory[memory[ip + 1]] : memory[ip + 1]
-		puts "Output: #{value1}"
 		if value1 != 0
-			return 99
+			@output = value1
+			@ip += 2
+			return 98
 		end
 		2
 	end
 
 	def get_input(mode)
-		@memory[memory[ip + 1]] = @system_id
+		return @input_system if @input_system == @input_system.to_i
+		@memory[memory[ip + 1]] = @input_system.get_value(ip)
 		2
 	end
 
