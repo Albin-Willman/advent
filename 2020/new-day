@@ -13,9 +13,26 @@ echo 'input = []' >> script.rb
 echo 'File.open("data.txt").read.each_line do |line|' >> script.rb
 echo '    input << line' >> script.rb
 echo 'end' >> script.rb
+echo 'puts Task.run(input)' >> script.rb
+echo 'puts Task.run_b(input)' >> script.rb
 touch task.rb
+echo 'class Task' >> task.rb
+echo '  def self.run(input)' >> task.rb
+echo "    puts 'Not done yet'" >> task.rb
+echo '  end' >> task.rb
+echo '  def self.run_b(input)' >> task.rb
+echo "    puts 'Not done yet'" >> task.rb
+echo '  end' >> task.rb
+echo 'end' >> task.rb
 touch data.txt
+touch test-data.txt
 touch test.rb
 chmod +x test.rb
 echo "#!/usr/bin/env ruby" >> test.rb
 echo 'require "./task.rb"' >> test.rb
+echo 'input = []' >> test.rb
+echo 'File.open("test-data.txt").read.each_line do |line|' >> test.rb
+echo '    input << line' >> test.rb
+echo 'end' >> test.rb
+echo 'puts Task.run(input)' >> test.rb
+echo 'puts Task.run_b(input)' >> test.rb
